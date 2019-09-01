@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-01 Sun 19:56 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>x86 assembly language</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="aoibird" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="main.css" /> <link rel="stylesheet" href="/assets/katex/katex.min.css"> <script defer src="/assets/katex/katex.min.js"></script> <script defer src="/assets/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">x86 assembly language</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org382708c">1. History</a></li>
+<li><a href="#orge7dbd85">2. Architecture</a>
+<ul>
+<li><a href="#org35a6397">2.1. Registers</a></li>
+</ul>
+</li>
+<li><a href="#orgbd7fb00">3. Segments</a></li>
+<li><a href="#org6a7a44f">4. Piplining</a></li>
+<li><a href="#org9b9c531">5. Instructions</a>
+<ul>
+<li><a href="#org19c7784">5.1. DIV</a></li>
+<li><a href="#orgce3ba87">5.2. MUL</a></li>
+<li><a href="#orgd03c8aa">5.3. CMP</a></li>
+<li><a href="#orgddbc123">5.4. JE, JNE, JG, JGE, JB, JBE, JMP</a></li>
+<li><a href="#org9ca7194">5.5. LOOP</a></li>
+</ul>
+</li>
+<li><a href="#org94d9737">6. Changelogs</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org382708c" class="outline-2">
+<h2 id="org382708c"><span class="section-number-2">1</span> History</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+在 8086 之前是 8008 等处理器，8086 是一个 16 位处理器，具有 16 位的数据位，Intel 推出 8086 后由于当时 16 位的外设普遍较贵，又推出了 8 位兼容的 8088，8088 被 IBM PC 所采用并且操作系统是 MS-DOS，从此开启了 Wintel 的康庄大道。此后，又推出后继系列处理器 80186、80286、80386、80486、Pentium 等。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge7dbd85" class="outline-2">
+<h2 id="orge7dbd85"><span class="section-number-2">2</span> Architecture</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org35a6397" class="outline-3">
+<h3 id="org35a6397"><span class="section-number-3">2.1</span> Registers</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+由于系列最初的处理器 8086 是 16 位处理器，所以 AX、BX、CX、DX、SI、DI、IP、SP、BP 等寄存器都是 16 位的。之后推出 8088 为 8 位兼容版，所以又把 AX、BX 等划分高低位，如 AH、AL，允许 8 位的存取。后继系列处理器中，32 位处理器的寄存器代号加上前缀变为 EAX、EBX 等即表示 32 位拓展的寄存器，64 位则是 RAX、RBX 等。
+</p>
+
+<p>
+以下是寄存器代号和用途。
+</p>
+
+<p>
+通用寄存器（general-purposed register）：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">label</th>
+<th scope="col" class="org-left">meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">AX</td>
+<td class="org-left">accumulator, store arithmetic results</td>
+</tr>
+
+<tr>
+<td class="org-left">BX</td>
+<td class="org-left">base addressing register</td>
+</tr>
+
+<tr>
+<td class="org-left">CX</td>
+<td class="org-left">counter in loop operations</td>
+</tr>
+
+<tr>
+<td class="org-left">DX</td>
+<td class="org-left">point to data in IO operations</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+段寄存器（segment register）：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">label</th>
+<th scope="col" class="org-left">meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">CS</td>
+<td class="org-left">code segment register</td>
+</tr>
+
+<tr>
+<td class="org-left">DS</td>
+<td class="org-left">data segment register</td>
+</tr>
+
+<tr>
+<td class="org-left">ES</td>
+<td class="org-left">extra data segment register</td>
+</tr>
+
+<tr>
+<td class="org-left">SS</td>
+<td class="org-left">stack segment register</td>
+</tr>
+
+<tr>
+<td class="org-left">FS, GS</td>
+<td class="org-left">additional data segment registers</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+索引寄存器（index register）：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">label</th>
+<th scope="col" class="org-left">meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">SI</td>
+<td class="org-left">source index, for moving strings and array index</td>
+</tr>
+
+<tr>
+<td class="org-left">DI</td>
+<td class="org-left">destination index</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+标志寄存器及标志位（flags register and flags）：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">label</th>
+<th scope="col" class="org-left">meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">EFLAGS</td>
+<td class="org-left">flags register</td>
+</tr>
+
+<tr>
+<td class="org-left">ZF</td>
+<td class="org-left">zero flag</td>
+</tr>
+
+<tr>
+<td class="org-left">OF</td>
+<td class="org-left">overflow flag</td>
+</tr>
+
+<tr>
+<td class="org-left">CF</td>
+<td class="org-left">carry flag</td>
+</tr>
+
+<tr>
+<td class="org-left">PF</td>
+<td class="org-left">parity flag</td>
+</tr>
+
+<tr>
+<td class="org-left">SF</td>
+<td class="org-left">sign flag</td>
+</tr>
+
+<tr>
+<td class="org-left">DF</td>
+<td class="org-left">direction flag</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+其他：
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">label</th>
+<th scope="col" class="org-left">meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">IP</td>
+<td class="org-left">instruction pointer</td>
+</tr>
+
+<tr>
+<td class="org-left">SP</td>
+<td class="org-left">stack pointer</td>
+</tr>
+
+<tr>
+<td class="org-left">BP</td>
+<td class="org-left">base pointer</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbd7fb00" class="outline-2">
+<h2 id="orgbd7fb00"><span class="section-number-2">3</span> Segments</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+8086 处理器有 20 位地址，可以表示为 0x00000 ～ 0xFFFFF，一个段可表示范围为 0x0000 ～ 0xFFFF，因此一个段最大为 64 KB 即 2<sup>16</sup>，段的起始地址低 4 位应为 0x0，例如 0x00000、0x00010、0x00020（可能是为了和偏移量的位数一样）。因此，段可以用段基址省略末尾 0 和偏移量表示，即 <code>&lt;base&gt;:&lt;offset&gt;</code> ，例如 <code>1AB2:0091</code> 表示 1AB20 至 1AB20 + 0091。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6a7a44f" class="outline-2">
+<h2 id="org6a7a44f"><span class="section-number-2">4</span> Piplining</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+8086 的流水线分两个阶段取指（fetch）和执行（execute）。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9b9c531" class="outline-2">
+<h2 id="org9b9c531"><span class="section-number-2">5</span> Instructions</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org19c7784" class="outline-3">
+<h3 id="org19c7784"><span class="section-number-3">5.1</span> DIV</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+被除数是 EDX:EAX 的合并，除以 DIV 指令给定的寄存器，商存在 EAX，余数存在 EDX。如：100 / 6 = 16 &#x2026; 4，100 放在 EAX 里，EDX 清零，6 放在 ECX，除 ECX，EAX 为 16，EDX 为 4。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #6c3163; font-weight: bold;">mov</span> <span style="color: #3a81c3; font-weight: bold;">edx</span>, 0        <span style="color: #2aa1ae; background-color: #ecf3ec;">; </span><span style="color: #2aa1ae; background-color: #ecf3ec;">clear dividend</span>
+<span style="color: #6c3163; font-weight: bold;">mov</span> <span style="color: #3a81c3; font-weight: bold;">eax</span>, 0x8003   <span style="color: #2aa1ae; background-color: #ecf3ec;">; </span><span style="color: #2aa1ae; background-color: #ecf3ec;">dividend</span>
+<span style="color: #6c3163; font-weight: bold;">mov</span> <span style="color: #3a81c3; font-weight: bold;">ecx</span>, 0x100    <span style="color: #2aa1ae; background-color: #ecf3ec;">; </span><span style="color: #2aa1ae; background-color: #ecf3ec;">divisor</span>
+<span style="color: #6c3163; font-weight: bold;">div</span> <span style="color: #3a81c3; font-weight: bold;">ecx</span>           <span style="color: #2aa1ae; background-color: #ecf3ec;">; </span><span style="color: #2aa1ae; background-color: #ecf3ec;">EAX = 0x80, EDX = 0x3</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgce3ba87" class="outline-3">
+<h3 id="orgce3ba87"><span class="section-number-3">5.2</span> MUL</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+乘数存在 EAX，乘以 MUL 指令给定寄存器，结果存在 EDX:EAX 的合并里。如 100 * 10 = 1000，100 放在 EAX，10 放在 ECX，乘以 ECX，结果 1000 存在 EDX:EAX 的合并里。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #6c3163; font-weight: bold;">mov</span> <span style="color: #3a81c3; font-weight: bold;">edx</span>, 0
+<span style="color: #6c3163; font-weight: bold;">mov</span> <span style="color: #3a81c3; font-weight: bold;">eax</span>, 100
+<span style="color: #6c3163; font-weight: bold;">mov</span> <span style="color: #3a81c3; font-weight: bold;">ecx</span>, 10
+<span style="color: #6c3163; font-weight: bold;">mul</span> <span style="color: #3a81c3; font-weight: bold;">ecx</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd03c8aa" class="outline-3">
+<h3 id="orgd03c8aa"><span class="section-number-3">5.3</span> CMP</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+比较指令，与条件跳转一起使用。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">cmp dst, src</th>
+<th scope="col" class="org-right">ZF</th>
+<th scope="col" class="org-right">CF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">dst = src</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-left">dst &lt; src</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left">dst &gt; src</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgddbc123" class="outline-3">
+<h3 id="orgddbc123"><span class="section-number-3">5.4</span> JE, JNE, JG, JGE, JB, JBE, JMP</h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+条件跳转指令，与比较指令结合使用。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #6c3163; font-weight: bold;">cmp</span> <span style="color: #3a81c3; font-weight: bold;">eax</span>, 0
+<span style="color: #6c3163; font-weight: bold;">je</span> <span style="color: #3a81c3; font-weight: bold;">counternowzero</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9ca7194" class="outline-3">
+<h3 id="org9ca7194"><span class="section-number-3">5.5</span> LOOP</h3>
+<div class="outline-text-3" id="text-5-5">
+<p>
+循环，默认 EDX 为计数器，每执行一次计数器减一，当计数器减至零不循环。
+</p>
+<div class="org-src-container">
+<pre class="src src-asm"><span style="color: #6c3163; font-weight: bold;">mov</span> <span style="color: #3a81c3; font-weight: bold;">ecx</span>, 5
+<span style="color: #6c3163; font-weight: bold;">startloop</span>:
+  <span style="color: #3a81c3; font-weight: bold;">loop</span> startloop
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org94d9737" class="outline-2">
+<h2 id="org94d9737"><span class="section-number-2">6</span> Changelogs</h2>
+<div class="outline-text-2" id="text-6">
+<ul class="org-ul">
+<li>【2019-04-09】初稿，历史与架构部分：x86 系列处理器的历史、寄存器命名的由来、段和流水线的概念。</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>

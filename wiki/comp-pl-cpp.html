@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-01 Sun 19:56 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>C++</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="aoibird" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="main.css" /> <link rel="stylesheet" href="/assets/katex/katex.min.css"> <script defer src="/assets/katex/katex.min.js"></script> <script defer src="/assets/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">C++</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org6ba7a06">1. Object-oriented</a>
+<ul>
+<li><a href="#orgf5302a3">1.1. Define</a></li>
+<li><a href="#org5a70974">1.2. Inheritance</a></li>
+<li><a href="#org18d92d0">1.3. Operator overloading</a></li>
+<li><a href="#org5a3fb98">1.4. Override</a></li>
+</ul>
+</li>
+<li><a href="#org37b1d98">2. Standard Library</a>
+<ul>
+<li><a href="#org3861120">2.1. Vector</a></li>
+<li><a href="#org42ee998">2.2. Stack</a></li>
+<li><a href="#org99bc972">2.3. Queue &amp; Priority Queue</a></li>
+<li><a href="#orgecf80cb">2.4. Structure</a></li>
+</ul>
+</li>
+<li><a href="#org3bc7ee5">3. See also</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6ba7a06" class="outline-2">
+<h2 id="org6ba7a06"><span class="section-number-2">1</span> Object-oriented</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+主要概念：抽象、封装、重载、继承、多态。
+</p>
+
+<p>
+面向对象的思想是通过定义类来实现对“对象”这一概念的抽象，类将数据和代码封装在一起构成对象的属性和方法。类可以通过继承派生出子类，也叫派生类，派生类的方法可以与基类不同，这是用多态实现的运行时选择调用函数。重载即对操作符重新定义，对不同的类执行特定操作。
+</p>
+</div>
+
+<div id="outline-container-orgf5302a3" class="outline-3">
+<h3 id="orgf5302a3"><span class="section-number-3">1.1</span> Define</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+类有属性和方法，属性一般为 <code>private</code> ，方法一般为 <code>public</code> ，方法主体可以写在类的内部也可以写在外部，写在内部写法就是普通函数，写在外部方法名加上类名：
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">Fruit</span> {
+<span style="color: #3a81c3; font-weight: bold;">private</span>:
+  <span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #715ab1;">weight</span>;
+<span style="color: #3a81c3; font-weight: bold;">public</span>:
+  <span style="color: #ba2f59; font-weight: bold;">void</span> <span style="color: #6c3163; font-weight: bold;">peel</span>(<span style="color: #ba2f59; font-weight: bold;">void</span>);
+};
+
+<span style="color: #ba2f59; font-weight: bold;">void</span> <span style="color: #4e3163;">Fruit</span>::<span style="color: #6c3163; font-weight: bold;">peel</span>() {
+  printf(<span style="color: #2d9574;">"peeling a base class fruit\n"</span>);
+}
+</pre>
+</div>
+
+<p>
+类有构造函数和析构函数，构造函数在对象创建时调用，做一些初始化的工作，析构函数则是销毁对象释放内存，析构函数可以显式调用，通常被会自动调用，两个特殊函数没有返回值，且要与类同名：
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #4e3163;">Fruit</span>::<span style="color: #6c3163; font-weight: bold;">Fruit</span>() {};
+<span style="color: #4e3163;">Fruit</span>::~<span style="color: #6c3163; font-weight: bold;">Fruit</span>() {};
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a70974" class="outline-3">
+<h3 id="org5a70974"><span class="section-number-3">1.2</span> Inheritance</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+继承就是复用父类的属性和方法，继承的写法如下：
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">Fruit</span> {};
+<span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">Apple</span> : <span style="color: #3a81c3; font-weight: bold;">public</span> <span style="color: #ba2f59; font-weight: bold;">Fruit</span> {};
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org18d92d0" class="outline-3">
+<h3 id="org18d92d0"><span class="section-number-3">1.3</span> Operator overloading</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+可以重定义操作符对类的操作，比如两个水果对象相加是两个对象的重量相加：
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">Fruit</span> {
+<span style="color: #3a81c3; font-weight: bold;">public</span>:
+  <span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #3a81c3; font-weight: bold;">operator</span><span style="color: #6c3163; font-weight: bold;">+</span>(<span style="color: #ba2f59; font-weight: bold;">Fruit</span> &amp;<span style="color: #715ab1;">f</span>);
+<span style="color: #3a81c3; font-weight: bold;">private</span>:
+  <span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #715ab1;">weight</span>;
+};
+
+<span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">&#21487;&#20197;&#20351;&#29992;&#65306;</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">Fruit f1, f2, f3;</span>
+<span style="color: #2aa1ae; background-color: #ecf3ec;">// </span><span style="color: #2aa1ae; background-color: #ecf3ec;">f3 = f1 + f2;</span>
+<span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #4e3163;">Fruit</span>::<span style="color: #3a81c3; font-weight: bold;">operator</span><span style="color: #6c3163; font-weight: bold;">+</span>(<span style="color: #ba2f59; font-weight: bold;">Fruit</span> &amp;<span style="color: #715ab1;">f</span>) {
+  <span style="color: #3a81c3; font-weight: bold;">return</span> weight + f.weight;
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5a3fb98" class="outline-3">
+<h3 id="org5a3fb98"><span class="section-number-3">1.4</span> Override</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+在 C++ 中需要显式覆盖添加 <code>virtual</code> 限定符：
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">Fruit</span> {
+<span style="color: #3a81c3; font-weight: bold;">public</span>:
+  <span style="color: #ba2f59; font-weight: bold;">void</span> <span style="color: #6c3163; font-weight: bold;">peel</span>(<span style="color: #ba2f59; font-weight: bold;">void</span>) { printf(<span style="color: #2d9574;">"peeling a base class fruit\n"</span>); }
+};
+
+<span style="color: #3a81c3; font-weight: bold;">class</span> <span style="color: #ba2f59; font-weight: bold;">Apple</span> : <span style="color: #3a81c3; font-weight: bold;">public</span> <span style="color: #ba2f59; font-weight: bold;">Fruit</span> {
+<span style="color: #3a81c3; font-weight: bold;">public</span>:
+  <span style="color: #3a81c3; font-weight: bold;">virtual</span> <span style="color: #ba2f59; font-weight: bold;">void</span> <span style="color: #6c3163; font-weight: bold;">peel</span>(<span style="color: #ba2f59; font-weight: bold;">void</span>) { printf(<span style="color: #2d9574;">"peeling an apple\n"</span>); }
+};
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org37b1d98" class="outline-2">
+<h2 id="org37b1d98"><span class="section-number-2">2</span> Standard Library</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+C++ 标准库中已经有常见的数据结构可以直接使用。
+</p>
+</div>
+
+<div id="outline-container-org3861120" class="outline-3">
+<h3 id="org3861120"><span class="section-number-3">2.1</span> Vector</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+类似于动态数组，长度可变的数组，常用操作有 <code>push_back</code> 、 <code>erase</code> 、 <code>insert</code> 、 <code>begin</code> 、 <code>end</code> 、 <code>size</code> ：
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #6c3163;">#include</span> <span style="color: #2d9574;">&lt;vector&gt;</span>
+<span style="color: #3a81c3; font-weight: bold;">using</span> <span style="color: #3a81c3; font-weight: bold;">namespace</span> <span style="color: #4e3163;">std</span>;
+<span style="color: #ba2f59; font-weight: bold;">vector</span>&lt;<span style="color: #ba2f59; font-weight: bold;">int</span>&gt; <span style="color: #715ab1;">v</span>;
+v.push_back(1);
+v.push_back(2);
+v.erase(v.begin() + 1);
+v.insert(v.end(), 3);
+
+<span style="color: #3a81c3; font-weight: bold;">for</span> (<span style="color: #ba2f59; font-weight: bold;">int</span> <span style="color: #715ab1;">i</span> = 0; i &lt; v.size(); i++);
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org42ee998" class="outline-3">
+<h3 id="org42ee998"><span class="section-number-3">2.2</span> Stack</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+常用操作 <code>push</code> 、 <code>pop</code> 、 <code>top</code> 、 <code>empty</code> 、 <code>size</code> ：
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #6c3163;">#include</span> <span style="color: #2d9574;">&lt;stack&gt;</span>
+<span style="color: #3a81c3; font-weight: bold;">using</span> <span style="color: #3a81c3; font-weight: bold;">namespace</span> <span style="color: #4e3163;">std</span>;
+<span style="color: #ba2f59; font-weight: bold;">stack</span>&lt;<span style="color: #ba2f59; font-weight: bold;">int</span>&gt; <span style="color: #715ab1;">s</span>;
+s.push(1);
+s.top();
+s.pop();
+s.empty();
+s.size();
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org99bc972" class="outline-3">
+<h3 id="org99bc972"><span class="section-number-3">2.3</span> Queue &amp; Priority Queue</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+同理，常用操作有 <code>push</code> 、 <code>empty</code> 、 <code>front</code> 、 <code>pop</code> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgecf80cb" class="outline-3">
+<h3 id="orgecf80cb"><span class="section-number-3">2.4</span> Structure</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+结构体可以像类一样在内部定义函数。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3bc7ee5" class="outline-2">
+<h2 id="org3bc7ee5"><span class="section-number-2">3</span> See also</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>《C 专家编程（Expert C Programming）》，你会 C，所以 C++ 也不在话下：参考面向对象的写法</li>
+<li><i>Principles of Algorithmic Problem Solving</i> 参考标准库中数据结构的使用</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>

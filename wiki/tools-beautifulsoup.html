@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-09-01 Sun 19:56 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BeautifulSoup 4.2.0</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="aoibird" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="main.css" /> <link rel="stylesheet" href="/assets/katex/katex.min.css"> <script defer src="/assets/katex/katex.min.js"></script> <script defer src="/assets/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">BeautifulSoup 4.2.0</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgf0f87d0">1. 基本使用</a></li>
+<li><a href="#orgd1282e5">2. 安装</a></li>
+<li><a href="#orgbce16db">3. 对象种类</a></li>
+<li><a href="#orgca17596">4. 历遍文档树</a></li>
+<li><a href="#org1314aeb">5. 搜索文档树</a></li>
+<li><a href="#org640d7ca">6. 修改文档树</a></li>
+<li><a href="#org7342c57">7. 输出</a></li>
+<li><a href="#orgce91698">8. 其他</a></li>
+</ul>
+</div>
+</div>
+<p>
+只是单纯地摘录文档。
+</p>
+
+<div id="outline-container-orgf0f87d0" class="outline-2">
+<h2 id="orgf0f87d0"><span class="section-number-2">1</span> 基本使用</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #3a81c3; font-weight: bold;">from</span> bs4 <span style="color: #3a81c3; font-weight: bold;">import</span> BeautifulSoup
+
+<span style="color: #715ab1;">soup</span> = BeautifulSoup(html)
+<span style="color: #715ab1;">soup</span> = BeautifulSoup(<span style="color: #2d9574;">"&lt;html&gt;data&lt;/html&gt;"</span>)
+<span style="color: #715ab1;">soup</span> = BeautifulSoup(<span style="color: #3a81c3;">open</span>(<span style="color: #2d9574;">"index.html"</span>))
+</pre>
+</div>
+
+<p>
+可以传入字符串也可以传入文件句柄。文档会被转化为Unicode。
+</p>
+
+<ul class="org-ul">
+<li><code>soup.prettify()</code> : 格式化</li>
+<li><code>soup.title</code> : 得到 <code>&lt;title&gt;</code> 标签</li>
+<li><code>soup.title.name</code></li>
+<li><code>soup.title.string</code></li>
+<li><code>soup.title.parent.name</code></li>
+<li><code>soup.p</code></li>
+<li><code>soup.p['class']</code> : 得到第一个 <code>&lt;p&gt;</code> 标签的 <code>class</code> 属性</li>
+<li><code>soup.a</code></li>
+<li><code>soup.find_all('a')</code> : 找到所有 <code>&lt;a&gt;</code> 标签，可迭代</li>
+<li><code>soup.find(id = 'link3')</code></li>
+<li><code>soup.get_text()</code> : 得到文档的所有文字内容</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd1282e5" class="outline-2">
+<h2 id="orgd1282e5"><span class="section-number-2">2</span> 安装</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+通过 <code>apt</code> 、 <code>pip</code> 或 <code>easy_install</code> 安装BeautifulSoup4。
+</p>
+
+<p>
+可选解析器：
+</p>
+<ol class="org-ol">
+<li>Python标准库 : <code>BeautifulSoup(markup, "html.parser")</code></li>
+<li>lxml HTML解析器 : <code>BeautifulSoup(markup, "lxml")</code></li>
+<li>lxml XML解析器 : <code>BeautifulSoup(markup, ["lxml", "xml"])</code></li>
+<li>html5lib : <code>BeautifulSoup(markup, "html5lib")</code></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgbce16db" class="outline-2">
+<h2 id="orgbce16db"><span class="section-number-2">3</span> 对象种类</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>Tag（标签）
+<ul class="org-ul">
+<li>Name : <code>tag.name</code> 获取，比如 <code>soup.title.name</code></li>
+<li>Attibutes : <code>tag['class']</code> 或 <code>tag.attrs</code> 获取， <code>tag['id'] = 2</code> 修改， <code>del tag['id']</code> 删除
+<ul class="org-ul">
+<li>多值属性</li>
+</ul></li>
+</ul></li>
+<li>NavigableString（可历遍字符串）</li>
+<li>BeautifulSoup</li>
+<li>Comment（注释及特殊字符串）</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgca17596" class="outline-2">
+<h2 id="orgca17596"><span class="section-number-2">4</span> 历遍文档树</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>子节点
+<ul class="org-ul">
+<li>通过标签的名字，点取法，比如 <code>soup.body.b</code> ，只能取得第一个标签</li>
+<li><code>tag.contents</code> : 将子节点以列表形式输出</li>
+<li><code>tag.children</code> : 可迭代</li>
+<li><code>tag.descendants</code> : 生成器，对子孙节点（包含子节点的子节点）历遍</li>
+<li><code>tag.string</code> : 仅有一个子节点时，返回子节点，多个子节点返回None</li>
+<li><code>tag.strings</code> : 生成器，用来历遍NavigableString</li>
+<li><code>tag.stripped_strings</code> : 生成器，去除多余的空白内容</li>
+</ul></li>
+<li>父节点
+<ul class="org-ul">
+<li><code>tag.parent</code> : 返回父节点（BeautifulSoup对象）</li>
+<li><code>tag.parents</code> : 生成器，可历遍所有父节点</li>
+</ul></li>
+<li>兄弟节点
+<ul class="org-ul">
+<li><code>tag.next_sibling</code> 和 <code>tag.previous_sibling</code> : 返回BeautifulSoup对象</li>
+<li><code>tag.next_siblings</code> 和 <code>tag.previous_siblings</code> : 返回生成器</li>
+</ul></li>
+<li>回退和前进
+<ul class="org-ul">
+<li><code>tag.next_element</code> 和 <code>tag.previous_element</code> : 下一个或上一个被解析的对象</li>
+<li><code>tag.next_elements</code> 和 <code>tag.previous_elements</code> : 返回生成器</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1314aeb" class="outline-2">
+<h2 id="org1314aeb"><span class="section-number-2">5</span> 搜索文档树</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>过滤器
+<ul class="org-ul">
+<li>字符串：比如 <code>soup.find_all('b')</code> ，为查找所有 <code>&lt;b&gt;</code> 标签</li>
+<li>正则表达式：比如 <code>soup.find_all(re.compile("..."))</code></li>
+<li>列表：比如 <code>soup.find_all(["a", "b"])</code> 为查找所有 <code>&lt;a&gt;</code> 和 <code>&lt;b&gt;</code> 标签</li>
+<li>True：比如 <code>soup.find_all(True)</code> 查找到所有的标签，但是不会返回字符串节点</li>
+<li>方法：定义方法过滤</li>
+</ul></li>
+<li><code>find_all()</code> : <code>find_all(name, attrs, recursive, text, **kwargs)</code>
+<ul class="org-ul">
+<li><code>name</code> 参数 : 按标签名字搜索，比如 <code>soup.find_all("title")</code> 为查找名为title的标签</li>
+<li><code>keyword</code> 参数 : 按标签的属性搜索，比如 <code>soup.find_all(id = 'link2')</code> 和 <code>soup.find_all(class_ = 'link2')</code></li>
+<li><code>text</code> 参数 : 按字符串内容搜索，比如 <code>soup.find_all(text = "Elsie")</code> 和 <code>soup.find_all(text=True)</code></li>
+<li><code>limit</code> 参数 : 限制搜索返回结果数量，比如 <code>soup.find_all("a", limit=2)</code></li>
+<li><code>recursive</code> 参数 : 是否递归搜索，比如 <code>recursive=False</code></li>
+<li>简写形式 : <code>soup.find_all("a")    -&gt;    soup("a")</code></li>
+</ul></li>
+<li>同理可知
+<ul class="org-ul">
+<li><code>find()</code></li>
+<li><code>find_parent()</code> 、 <code>find_parents()</code></li>
+<li><code>find_next_sibling()</code> 、 <code>find_next_siblings()</code></li>
+<li><code>find_previous_sibling()</code> 、 <code>find_previous_siblings()</code></li>
+<li><code>find_next()</code> 、 <code>find_all_next()</code></li>
+<li><code>find_previous()</code> 、 <code>find_all_previous()</code></li>
+</ul></li>
+<li>CSS选择器 : <code>soup.select("head &gt; title")</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org640d7ca" class="outline-2">
+<h2 id="org640d7ca"><span class="section-number-2">6</span> 修改文档树</h2>
+<div class="outline-text-2" id="text-6">
+<ul class="org-ul">
+<li>对属性赋值</li>
+<li><code>tag.append()</code> : 比如 <code>soup.a.append("Bar")</code></li>
+<li><code>BeautifulSoup.new_string()</code> 和 <code>BeautifulSoup.new_tag()</code></li>
+<li><code>tag.insert()</code> : 比如 <code>tag.insert(1, "but did not endorse ")</code></li>
+<li><code>elem.insert_before()</code> 和 <code>elem.insert_after()</code> （可以是标签或者文本节点）</li>
+<li><code>tag.clear()</code> : 清除标签的内容</li>
+<li><code>elem.extract()</code> : 从文档树移除元素并返回（可以是标签也可以是文本节点）</li>
+<li><code>elem.decompose()</code> : 完全销毁</li>
+<li><code>elem.replace_with()</code> : 替换</li>
+<li><code>elem.wrap()</code> : 对元素进行包装并返回结果，比如 <code>soup.p.string.wrap(soup.new_tag("b"))</code></li>
+<li><code>elem.unwrap()</code> : 与之相反的操作</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7342c57" class="outline-2">
+<h2 id="org7342c57"><span class="section-number-2">7</span> 输出</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li>格式化输出 : <code>soup.prettify()</code></li>
+<li>压缩输出 : <code>str()=或=unicode()</code></li>
+<li>得到文本内容 : <code>get_text()</code> ，比如 <code>soup.get_text("|", strip=True)</code></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgce91698" class="outline-2">
+<h2 id="orgce91698"><span class="section-number-2">8</span> 其他</h2>
+<div class="outline-text-2" id="text-8">
+<ul class="org-ul">
+<li>指定解析器</li>
+<li>编码</li>
+<li>解析部分文档</li>
+<li>常见问题</li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>
