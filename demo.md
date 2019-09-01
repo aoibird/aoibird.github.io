@@ -1,7 +1,30 @@
 ---
-layout: post
+layout: page
 title: "Demo"
+permalink: /demo/
+description: Demo
 ---
+
+## Basic Elements
+
+### Heading 3
+
+*italic*, **bold**, ~~strikethrough~~
+
+
+> blockquote
+
+horizontal rule
+
+--------------------------------------------------
+
+
+table
+
+| A      | B    | C    |
+|--------|------|------|
+| 123456 | 7890 | ABCD |
+| 1      | 3    | 9    |
 
 ## Ruby Charecter
 
@@ -37,4 +60,29 @@ Scheme
 (+ 1 2)
 
 (define (cube x) (* x x x))
+```
+
+## LaTeX
+
+\\[
+\lim_{n \to \infty}
+\sum_{k=1}^n \frac{1}{k^2}
+= \frac{\pi^2}{6}
+\\]
+
+```latex
+\\[
+\lim_{n \to \infty}
+\sum_{k=1}^n \frac{1}{k^2}
+= \frac{\pi^2}{6}
+\\]
+```
+
+KaTeX: https://katex.org
+
+
+$$2^n$$
+
+```
+$$2^n$$
 ```
