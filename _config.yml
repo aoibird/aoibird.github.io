@@ -1,8 +1,8 @@
 # Site settings
-title: aoibird's blog
+title: aoibird
 email: aoi@aoibird.com
 description: >- # this means to ignore newlines until "baseurl:"
-  personal blog
+  personal homepage
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://aoibird.github.io" # the base hostname & protocol for  site
 github_username: aoibird
@@ -10,7 +10,7 @@ rss: Feed
 
 show_excerpts: true
 
-permalink: /:year/:month/:day/:title:output_ext
+permalink: /blog/:year/:month/:day/:title:output_ext
 
 # Build settings
 markdown: kramdown
