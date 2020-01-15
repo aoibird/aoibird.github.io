@@ -26,25 +26,33 @@ permalink: /blog/
   </ul>
   {%- endif -%}
 
+
   <h2>Categories</h2>
+  <ul>
   {% for category in site.categories %}
   {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d %A" -%}
-    <h3>{{ category[0] }}</h3>
+    <li>{{ category[0] }}
     <ul>
     {% for post in category[1] %}
     <li><a href="{{ post.url }}">{{ post.title }}</a> {{ post.date | date: date_format }}</li>
     {% endfor %}
     </ul>
+    </li>
   {% endfor %}
+  </ul>
+
 
   <h2>Tags</h2>
+  <ul>
   {% for tag in site.tags %}
   {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d %A" -%}
-    <h3>{{ tag[0] }}</h3>
+    <li>{{ tag[0] }}
     <ul>
     {% for post in tag[1] %}
     <li><a href="{{ post.url }}">{{ post.title }}</a> {{ post.date | date: date_format }}</li>
     {% endfor %}
     </ul>
+    </li>
   {% endfor %}
+  </ul>
 </div>
