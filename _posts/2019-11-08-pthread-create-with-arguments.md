@@ -1,11 +1,11 @@
 ---
 layout: post
-title: 线程传参的坑？
+title: 线程传参
 categories: Computer/OS
 #  - Computer
 #  - Algorithms
 tags: [OS, Threads]
-description: 不知道是不是坑，反正我被坑到了。
+description:
 ---
 
 创建 POSIX 线程需要使用函数 `pthread_create()`，例如：
