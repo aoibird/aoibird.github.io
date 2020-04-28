@@ -2,11 +2,11 @@
 layout: post
 title: 写一份报告
 categories: [Toolbox]
-tags: [Toolbox, Org mode, Git]
+tags: [Toolbox, Org mode, Git, Emacs]
 ---
 
 ## 写作正文
-我认为对于写一份报告而言 Org mode 是最好的选择。
+我认为对于写一份报告而言 Org mode 是最好的选择（谦虚点……之一）。
 
 ### 为什么不用 Markdown？
 
@@ -21,7 +21,7 @@ Markdown 表达能力不足。Markdown 设计初衷就是简单、可读性强�
 ### Org mode 结合 LaTeX
 尽管 LaTeX 有以上不足，但是它仍然是强大的排版系统，尤其对于数学公式。用 Org mode 无法表达的内容，最终还是由 LaTeX 解决。
 
-所以最好的方法就是把它们结合在一起。
+所以最好的方法就是把它们结合在一起。Org mode 本身也支持嵌入 LaTeX 片段。
 
 以下是一个简单的例子：
 
