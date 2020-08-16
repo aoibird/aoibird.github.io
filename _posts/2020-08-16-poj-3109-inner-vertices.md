@@ -6,7 +6,7 @@ tags: [Algorithms, Competitive programming]
 ---
 
 ## 问题描述
-一个无限平面上有 N 个黑点其余为白点，如果某个白点水平左右、垂直上下都存在黑点，那么该点会变为黑点，求最终平面有多少黑点。
+一个无限平面上有 N 个黑点其余为白点，如果某个白点水平左右、垂直上下都存在黑点，那么该点会变为黑点，求最终平面有多少黑点。（[POJ 3109](http://poj.org/problem?id=3109)）
 
 ## 分析
 用到了[坐标离散化](https://oi-wiki.org/misc/discrete/)、[差分](https://oi-wiki.org/basic/prefix-sum/)、[树状数组](https://oi-wiki.org/ds/fenwick/)，原理不再赘述。
