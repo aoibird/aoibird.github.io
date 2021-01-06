@@ -149,6 +149,8 @@ Error message and password prompt
 
 <li>$:/plugins/tiddlywiki/codemirror</li>
 
+<li>$:/plugins/tiddlywiki/codemirror-keymap-emacs</li>
+
 <li>$:/plugins/tiddlywiki/codemirror-mode-css</li>
 
 <li>$:/plugins/tiddlywiki/codemirror-mode-htmlmixed</li>
@@ -168,6 +170,14 @@ Error message and password prompt
 <li>$:/SiteSubtitle</li>
 
 <li>$:/SiteTitle</li>
+
+<li>$:/state/add-plugin-info/$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.21/index.html/$:/temp/RemoteAssetInfo/https://tiddlywiki.com/library/v5.1.21/index.html/$:/plugins/tiddlywiki/codemirror-keymap-emacs</li>
+
+<li>$:/state/add-plugin-info/$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.21/index.html/$:/temp/RemoteAssetInfo/https://tiddlywiki.com/library/v5.1.21/index.html/$:/plugins/tiddlywiki/comments</li>
+
+<li>$:/state/add-plugin-info/$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.21/index.html/$:/temp/RemoteAssetInfo/https://tiddlywiki.com/library/v5.1.21/index.html/$:/plugins/tiddlywiki/d3</li>
+
+<li>$:/state/add-plugin-info/$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.21/index.html/$:/temp/RemoteAssetInfo/https://tiddlywiki.com/library/v5.1.21/index.html/$:/plugins/tiddlywiki/highlight</li>
 
 <li>$:/state/tab--1963855381</li>
 
@@ -9931,6 +9941,27 @@ Error message and password prompt
     }
 }</pre>
 </div>
+<div author="JeremyRuston" dependents="" description="CodeMirror Keymap: Emacs" list="readme" plugin-type="plugin" title="$:/plugins/tiddlywiki/codemirror-keymap-emacs" type="application/json" version="5.1.21">
+<pre>{
+    &quot;tiddlers&quot;: {
+        &quot;$:/plugins/tiddlywiki/codemirror/keymaps/emacs&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/keymaps/emacs&quot;,
+            &quot;module-type&quot;: &quot;codemirror-keymap&quot;,
+            &quot;text&quot;: &quot;emacs\n&quot;
+        },
+        &quot;$:/plugins/tiddlywiki/codemirror/keymap/emacs.js&quot;: {
+            &quot;text&quot;: &quot;// CodeMirror, copyright (c) by Marijn Haverbeke and others\n// Distributed under an MIT license: http://codemirror.net/LICENSE\n!function(t){\&quot;object\&quot;==typeof exports&amp;&amp;\&quot;object\&quot;==typeof module?t(require(\&quot;../lib/codemirror\&quot;)):\&quot;function\&quot;==typeof define&amp;&amp;define.amd?define([\&quot;../lib/codemirror\&quot;],t):t(CodeMirror)}(function(t){\&quot;use strict\&quot;;var e=t.Pos;function n(t,e){return t.line==e.line&amp;&amp;t.ch==e.ch}var r=[];function o(t){r.push(t),r.length&gt;50&amp;&amp;r.shift()}function i(t){return r[r.length-(t?Math.min(t,1):1)]||\&quot;\&quot;}var l=null;function a(t,e,i,a,c){null==c&amp;&amp;(c=t.getRange(e,i)),\&quot;grow\&quot;==a&amp;&amp;l&amp;&amp;l.cm==t&amp;&amp;n(e,l.pos)&amp;&amp;t.isClean(l.gen)?function(t){if(!r.length)return o(t);r[r.length-1]+=t}(c):!1!==a&amp;&amp;o(c),t.replaceRange(\&quot;\&quot;,e,i,\&quot;+delete\&quot;),l=\&quot;grow\&quot;==a?{cm:t,pos:e,gen:t.changeGeneration()}:null}function c(t,e,n){return t.findPosH(e,n,\&quot;char\&quot;,!0)}function u(t,e,n){return t.findPosH(e,n,\&quot;word\&quot;,!0)}function f(t,e,n){return t.findPosV(e,n,\&quot;line\&quot;,t.doc.sel.goalColumn)}function s(t,e,n){return t.findPosV(e,n,\&quot;page\&quot;,t.doc.sel.goalColumn)}function g(t,n,r){for(var o=n.line,i=t.getLine(o),l=/\\S/.test(r&lt;0?i.slice(0,n.ch):i.slice(n.ch)),a=t.firstLine(),c=t.lastLine();;){if((o+=r)&lt;a||o&gt;c)return t.clipPos(e(o-r,r&lt;0?0:null));if(i=t.getLine(o),/\\S/.test(i))l=!0;else if(l)return e(o,0)}}function C(t,n,r){for(var o=n.line,i=n.ch,l=t.getLine(n.line),a=!1;;){var c=l.charAt(i+(r&lt;0?-1:0));if(c){if(a&amp;&amp;/[!?.]/.test(c))return e(o,i+(r&gt;0?1:0));a||(a=/\\w/.test(c)),i+=r}else{if(o==(r&lt;0?t.firstLine():t.lastLine()))return e(o,i);if(l=t.getLine(o+r),!/\\S/.test(l))return e(o,i);o+=r,i=r&lt;0?l.length:0}}}function d(t,r,o){var i;if(t.findMatchingBracket&amp;&amp;(i=t.findMatchingBracket(r,{strict:!0}))&amp;&amp;i.match&amp;&amp;(i.forward?1:-1)==o)return o&gt;0?e(i.to.line,i.to.ch+1):i.to;for(var l=!0;;l=!1){var a=t.getTokenAt(r),c=e(r.line,o&lt;0?a.start:a.end);if(!(l&amp;&amp;o&gt;0&amp;&amp;a.end==r.ch)&amp;&amp;/\\w/.test(a.string))return c;var u=t.findPosH(c,o,\&quot;char\&quot;);if(n(c,u))return r;r=u}}function p(t,e){var n=t.state.emacsPrefix;return n?(L(t),\&quot;-\&quot;==n?-1:Number(n)):e?null:1}function h(t){var e=\&quot;string\&quot;==typeof t?function(e){e.execCommand(t)}:t;return function(t){var n=p(t);e(t);for(var r=1;r&lt;n;++r)e(t)}}function v(t,e,r,o){var i=p(t);i&lt;0&amp;&amp;(o=-o,i=-i);for(var l=0;l&lt;i;++l){var a=r(t,e,o);if(n(a,e))break;e=a}return e}function m(t,e){var n=function(n){n.extendSelection(v(n,n.getCursor(),t,e))};return n.motion=!0,n}function A(t,e,n,r){for(var o,i=t.listSelections(),l=i.length;l--;)a(t,o=i[l].head,v(t,o,e,n),r)}function S(t,e){if(t.somethingSelected()){for(var n,r=t.listSelections(),o=r.length;o--;)a(t,(n=r[o]).anchor,n.head,e);return!0}}function P(t,e){t.state.emacsPrefix?\&quot;-\&quot;!=e&amp;&amp;(t.state.emacsPrefix+=e):(t.state.emacsPrefix=e,t.on(\&quot;keyHandled\&quot;,x),t.on(\&quot;inputRead\&quot;,R))}var w={\&quot;Alt-G\&quot;:!0,\&quot;Ctrl-X\&quot;:!0,\&quot;Ctrl-Q\&quot;:!0,\&quot;Ctrl-U\&quot;:!0};function x(t,e){t.state.emacsPrefixMap||w.hasOwnProperty(e)||L(t)}function L(t){t.state.emacsPrefix=null,t.off(\&quot;keyHandled\&quot;,x),t.off(\&quot;inputRead\&quot;,R)}function R(t,e){var n=p(t);if(n&gt;1&amp;&amp;\&quot;+input\&quot;==e.origin){for(var r=e.text.join(\&quot;\\n\&quot;),o=\&quot;\&quot;,i=1;i&lt;n;++i)o+=r;t.replaceSelection(o)}}function y(t,e){(\&quot;string\&quot;!=typeof e||!/^\\d$/.test(e)&amp;&amp;\&quot;Ctrl-U\&quot;!=e)&amp;&amp;(t.removeKeyMap(D),t.state.emacsPrefixMap=!1,t.off(\&quot;keyHandled\&quot;,y),t.off(\&quot;inputRead\&quot;,y))}function k(t){t.setCursor(t.getCursor()),t.setExtending(!t.getExtending()),t.on(\&quot;change\&quot;,function(){t.setExtending(!1)})}function b(t){t.setExtending(!1),t.setCursor(t.getCursor())}function U(t,e){var n=t.getCursor(),r=t.findPosH(n,1,\&quot;word\&quot;);t.replaceRange(e(t.getRange(n,r)),n,r),t.setCursor(r)}t.emacs={kill:a,killRegion:S,repeated:h};var X=t.keyMap.emacs=t.normalizeKeyMap({\&quot;Ctrl-W\&quot;:function(t){a(t,t.getCursor(\&quot;start\&quot;),t.getCursor(\&quot;end\&quot;),!0)},\&quot;Ctrl-K\&quot;:h(function(t){var n=t.getCursor(),r=t.clipPos(e(n.line)),o=t.getRange(n,r);/\\S/.test(o)||(o+=\&quot;\\n\&quot;,r=e(n.line+1,0)),a(t,n,r,\&quot;grow\&quot;,o)}),\&quot;Alt-W\&quot;:function(t){o(t.getSelection()),b(t)},\&quot;Ctrl-Y\&quot;:function(t){var e=t.getCursor();t.replaceRange(i(p(t)),e,e,\&quot;paste\&quot;),t.setSelection(e,t.getCursor())},\&quot;Alt-Y\&quot;:function(t){t.replaceSelection((r.length&gt;1&amp;&amp;r.pop(),i()),\&quot;around\&quot;,\&quot;paste\&quot;)},\&quot;Ctrl-Space\&quot;:k,\&quot;Ctrl-Shift-2\&quot;:k,\&quot;Ctrl-F\&quot;:m(c,1),\&quot;Ctrl-B\&quot;:m(c,-1),Right:m(c,1),Left:m(c,-1),\&quot;Ctrl-D\&quot;:function(t){A(t,c,1,!1)},Delete:function(t){S(t,!1)||A(t,c,1,!1)},\&quot;Ctrl-H\&quot;:function(t){A(t,c,-1,!1)},Backspace:function(t){S(t,!1)||A(t,c,-1,!1)},\&quot;Alt-F\&quot;:m(u,1),\&quot;Alt-B\&quot;:m(u,-1),\&quot;Alt-D\&quot;:function(t){A(t,u,1,\&quot;grow\&quot;)},\&quot;Alt-Backspace\&quot;:function(t){A(t,u,-1,\&quot;grow\&quot;)},\&quot;Ctrl-N\&quot;:m(f,1),\&quot;Ctrl-P\&quot;:m(f,-1),Down:m(f,1),Up:m(f,-1),\&quot;Ctrl-A\&quot;:\&quot;goLineStart\&quot;,\&quot;Ctrl-E\&quot;:\&quot;goLineEnd\&quot;,End:\&quot;goLineEnd\&quot;,Home:\&quot;goLineStart\&quot;,\&quot;Alt-V\&quot;:m(s,-1),\&quot;Ctrl-V\&quot;:m(s,1),PageUp:m(s,-1),PageDown:m(s,1),\&quot;Ctrl-Up\&quot;:m(g,-1),\&quot;Ctrl-Down\&quot;:m(g,1),\&quot;Alt-A\&quot;:m(C,-1),\&quot;Alt-E\&quot;:m(C,1),\&quot;Alt-K\&quot;:function(t){A(t,C,1,\&quot;grow\&quot;)},\&quot;Ctrl-Alt-K\&quot;:function(t){A(t,d,1,\&quot;grow\&quot;)},\&quot;Ctrl-Alt-Backspace\&quot;:function(t){A(t,d,-1,\&quot;grow\&quot;)},\&quot;Ctrl-Alt-F\&quot;:m(d,1),\&quot;Ctrl-Alt-B\&quot;:m(d,-1),\&quot;Shift-Ctrl-Alt-2\&quot;:function(t){var e=t.getCursor();t.setSelection(v(t,e,d,1),e)},\&quot;Ctrl-Alt-T\&quot;:function(t){var e=d(t,t.getCursor(),-1),n=d(t,e,1),r=d(t,n,1),o=d(t,r,-1);t.replaceRange(t.getRange(o,r)+t.getRange(n,o)+t.getRange(e,n),e,r)},\&quot;Ctrl-Alt-U\&quot;:h(function(t){for(var n=t.getCursor(),r=n.line,o=n.ch,i=[];r&gt;=t.firstLine();){for(var l=t.getLine(r),a=null==o?l.length:o;a&gt;0;)if(\&quot;)\&quot;==(o=l.charAt(--a)))i.push(\&quot;(\&quot;);else if(\&quot;]\&quot;==o)i.push(\&quot;[\&quot;);else if(\&quot;}\&quot;==o)i.push(\&quot;{\&quot;);else if(/[\\(\\{\\[]/.test(o)&amp;&amp;(!i.length||i.pop()!=o))return t.extendSelection(e(r,a));--r,o=null}}),\&quot;Alt-Space\&quot;:function(t){for(var n=t.getCursor(),r=n.ch,o=n.ch,i=t.getLine(n.line);r&amp;&amp;/\\s/.test(i.charAt(r-1));)--r;for(;o&lt;i.length&amp;&amp;/\\s/.test(i.charAt(o));)++o;t.replaceRange(\&quot; \&quot;,e(n.line,r),e(n.line,o))},\&quot;Ctrl-O\&quot;:h(function(t){t.replaceSelection(\&quot;\\n\&quot;,\&quot;start\&quot;)}),\&quot;Ctrl-T\&quot;:h(function(t){t.execCommand(\&quot;transposeChars\&quot;)}),\&quot;Alt-C\&quot;:h(function(t){U(t,function(t){var e=t.search(/\\w/);return-1==e?t:t.slice(0,e)+t.charAt(e).toUpperCase()+t.slice(e+1).toLowerCase()})}),\&quot;Alt-U\&quot;:h(function(t){U(t,function(t){return t.toUpperCase()})}),\&quot;Alt-L\&quot;:h(function(t){U(t,function(t){return t.toLowerCase()})}),\&quot;Alt-;\&quot;:\&quot;toggleComment\&quot;,\&quot;Ctrl-/\&quot;:h(\&quot;undo\&quot;),\&quot;Shift-Ctrl--\&quot;:h(\&quot;undo\&quot;),\&quot;Ctrl-Z\&quot;:h(\&quot;undo\&quot;),\&quot;Cmd-Z\&quot;:h(\&quot;undo\&quot;),\&quot;Shift-Alt-,\&quot;:\&quot;goDocStart\&quot;,\&quot;Shift-Alt-.\&quot;:\&quot;goDocEnd\&quot;,\&quot;Ctrl-S\&quot;:\&quot;findPersistentNext\&quot;,\&quot;Ctrl-R\&quot;:\&quot;findPersistentPrev\&quot;,\&quot;Ctrl-G\&quot;:function(t){t.execCommand(\&quot;clearSearch\&quot;),b(t)},\&quot;Shift-Alt-5\&quot;:\&quot;replace\&quot;,\&quot;Alt-/\&quot;:\&quot;autocomplete\&quot;,Enter:\&quot;newlineAndIndent\&quot;,\&quot;Ctrl-J\&quot;:h(function(t){t.replaceSelection(\&quot;\\n\&quot;,\&quot;end\&quot;)}),Tab:\&quot;indentAuto\&quot;,\&quot;Alt-G G\&quot;:function(t){var e,n,r,o=p(t,!0);if(null!=o&amp;&amp;o&gt;0)return t.setCursor(o-1);n=\&quot;Goto line\&quot;,r=function(e){var n;e&amp;&amp;!isNaN(n=Number(e))&amp;&amp;n==(0|n)&amp;&amp;n&gt;0&amp;&amp;t.setCursor(n-1)},(e=t).openDialog?e.openDialog(n+': &lt;input type=\&quot;text\&quot; style=\&quot;width: 10em\&quot;/&gt;',r,{bottom:!0}):r(prompt(n,\&quot;\&quot;))},\&quot;Ctrl-X Tab\&quot;:function(t){t.indentSelection(p(t,!0)||t.getOption(\&quot;indentUnit\&quot;))},\&quot;Ctrl-X Ctrl-X\&quot;:function(t){t.setSelection(t.getCursor(\&quot;head\&quot;),t.getCursor(\&quot;anchor\&quot;))},\&quot;Ctrl-X Ctrl-S\&quot;:\&quot;save\&quot;,\&quot;Ctrl-X Ctrl-W\&quot;:\&quot;save\&quot;,\&quot;Ctrl-X S\&quot;:\&quot;saveAll\&quot;,\&quot;Ctrl-X F\&quot;:\&quot;open\&quot;,\&quot;Ctrl-X U\&quot;:h(\&quot;undo\&quot;),\&quot;Ctrl-X K\&quot;:\&quot;close\&quot;,\&quot;Ctrl-X Delete\&quot;:function(t){a(t,t.getCursor(),C(t,t.getCursor(),1),\&quot;grow\&quot;)},\&quot;Ctrl-X H\&quot;:\&quot;selectAll\&quot;,\&quot;Ctrl-Q Tab\&quot;:h(\&quot;insertTab\&quot;),\&quot;Ctrl-U\&quot;:function(t){t.state.emacsPrefixMap=!0,t.addKeyMap(D),t.on(\&quot;keyHandled\&quot;,y),t.on(\&quot;inputRead\&quot;,y)}}),D={\&quot;Ctrl-G\&quot;:L};function E(t){D[t]=function(e){P(e,t)},X[\&quot;Ctrl-\&quot;+t]=function(e){P(e,t)},w[\&quot;Ctrl-\&quot;+t]=!0}for(var H=0;H&lt;10;++H)E(String(H));E(\&quot;-\&quot;)});&quot;,
+            &quot;type&quot;: &quot;application/javascript&quot;,
+            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror/keymap/emacs.js&quot;,
+            &quot;module-type&quot;: &quot;codemirror&quot;
+        },
+        &quot;$:/plugins/tiddlywiki/codemirror-keymap-emacs/readme&quot;: {
+            &quot;title&quot;: &quot;$:/plugins/tiddlywiki/codemirror-keymap-emacs/readme&quot;,
+            &quot;text&quot;: &quot;This plugin adds a ''Keymap'' with some of the most important ''Emacs'' keyboard shortcuts\n\nFor more information about available ''keyboard shortcuts'' see the [ext[CodeMirror emacs demo|https://codemirror.net/demo/emacs.html]]\n&quot;
+        }
+    }
+}</pre>
+</div>
 <div author="JeremyRuston" dependents="" description="CodeMirror Mode: CSS Highlighting" list="readme" plugin-type="plugin" title="$:/plugins/tiddlywiki/codemirror-mode-css" type="application/json" version="5.1.21">
 <pre>{
     &quot;tiddlers&quot;: {
@@ -10439,14 +10470,26 @@ Error message and password prompt
 <div created="20190928044730487" modified="20190928044735967" title="$:/SiteTitle">
 <pre>现在可以公开的情报</pre>
 </div>
+<div created="20200203133945439" modified="20200203133945439" title="$:/state/add-plugin-info/$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.21/index.html/$:/temp/RemoteAssetInfo/https://tiddlywiki.com/library/v5.1.21/index.html/$:/plugins/tiddlywiki/codemirror-keymap-emacs">
+<pre>yes</pre>
+</div>
+<div created="20200203134011348" modified="20200203134011348" title="$:/state/add-plugin-info/$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.21/index.html/$:/temp/RemoteAssetInfo/https://tiddlywiki.com/library/v5.1.21/index.html/$:/plugins/tiddlywiki/comments">
+<pre>yes</pre>
+</div>
+<div created="20200203134026469" modified="20200203134026470" title="$:/state/add-plugin-info/$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.21/index.html/$:/temp/RemoteAssetInfo/https://tiddlywiki.com/library/v5.1.21/index.html/$:/plugins/tiddlywiki/d3">
+<pre>yes</pre>
+</div>
+<div created="20200203134038379" modified="20200203134051233" title="$:/state/add-plugin-info/$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.21/index.html/$:/temp/RemoteAssetInfo/https://tiddlywiki.com/library/v5.1.21/index.html/$:/plugins/tiddlywiki/highlight">
+<pre>no</pre>
+</div>
 <div created="20190928044217808" modified="20190928045504269" title="$:/state/tab--1963855381">
 <pre>$:/core/ui/ControlPanel/Theme</pre>
 </div>
 <div created="20190928045449739" modified="20190928045449739" title="$:/state/tab--2112689675">
 <pre>$:/core/ui/ControlPanel/Advanced</pre>
 </div>
-<div created="20190928044354947" modified="20190928045516086" title="$:/state/tab--697582678">
-<pre>$:/core/ui/ControlPanel/Settings/TiddlyWiki</pre>
+<div created="20190928044354947" modified="20200203133914103" title="$:/state/tab--697582678">
+<pre>$:/core/ui/ControlPanel/Settings/CodeMirror</pre>
 </div>
 <div created="20190928044247191" modified="20190928044441327" title="$:/state/tab--86143343">
 <pre>$:/core/ui/ControlPanel/Plugins/Installed/Plugins</pre>
@@ -10457,16 +10500,16 @@ Error message and password prompt
 <div created="20190928044152031" modified="20190928044402726" title="$:/state/tab-1342078386">
 <pre>$:/core/ui/ControlPanel/Plugins/Add/Plugins</pre>
 </div>
-<div created="20190928044055880" modified="20190928045529437" title="$:/state/tab-1749438307">
-<pre>$:/core/ui/ControlPanel/KeyboardShortcuts</pre>
+<div created="20190928044055880" modified="20200203133918777" title="$:/state/tab-1749438307">
+<pre>$:/core/ui/ControlPanel/Plugins</pre>
 </div>
-<div created="20190928045524789" modified="20190928045527022" title="$:/state/tab-2065006209">
-<pre>$:/core/ui/ControlPanel/Saving/TiddlySpot</pre>
+<div created="20190928045524789" modified="20200203133918124" title="$:/state/tab-2065006209">
+<pre>$:/core/ui/ControlPanel/Saving/DownloadSaver</pre>
 </div>
 <div created="20190928045533515" modified="20190928045537216" title="$:/state/tab/sidebar--595412856">
 <pre>$:/core/ui/SideBar/More</pre>
 </div>
-<div created="20190928045425558" list="$:/ControlPanel Home" modified="20190928045425558" title="$:/StoryList">
+<div created="20200203133832049" list="$:/ControlPanel Home" modified="20200203133832049" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10482,27 +10525,27 @@ Error message and password prompt
         },
         &quot;$:/info/url/full&quot;: {
             &quot;title&quot;: &quot;$:/info/url/full&quot;,
-            &quot;text&quot;: &quot;file:///Users/aoi/Downloads/wiki.html&quot;
+            &quot;text&quot;: &quot;http://localhost:4000/wiki.html&quot;
         },
         &quot;$:/info/url/host&quot;: {
             &quot;title&quot;: &quot;$:/info/url/host&quot;,
-            &quot;text&quot;: &quot;&quot;
+            &quot;text&quot;: &quot;localhost:4000&quot;
         },
         &quot;$:/info/url/hostname&quot;: {
             &quot;title&quot;: &quot;$:/info/url/hostname&quot;,
-            &quot;text&quot;: &quot;&quot;
+            &quot;text&quot;: &quot;localhost&quot;
         },
         &quot;$:/info/url/protocol&quot;: {
             &quot;title&quot;: &quot;$:/info/url/protocol&quot;,
-            &quot;text&quot;: &quot;file:&quot;
+            &quot;text&quot;: &quot;http:&quot;
         },
         &quot;$:/info/url/port&quot;: {
             &quot;title&quot;: &quot;$:/info/url/port&quot;,
-            &quot;text&quot;: &quot;&quot;
+            &quot;text&quot;: &quot;4000&quot;
         },
         &quot;$:/info/url/pathname&quot;: {
             &quot;title&quot;: &quot;$:/info/url/pathname&quot;,
-            &quot;text&quot;: &quot;/Users/aoi/Downloads/wiki.html&quot;
+            &quot;text&quot;: &quot;/wiki.html&quot;
         },
         &quot;$:/info/url/search&quot;: {
             &quot;title&quot;: &quot;$:/info/url/search&quot;,
@@ -10510,7 +10553,7 @@ Error message and password prompt
         },
         &quot;$:/info/url/origin&quot;: {
             &quot;title&quot;: &quot;$:/info/url/origin&quot;,
-            &quot;text&quot;: &quot;null&quot;
+            &quot;text&quot;: &quot;http://localhost:4000&quot;
         },
         &quot;$:/info/browser/screen/width&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/width&quot;,
@@ -11283,10 +11326,10 @@ This plugin also requires the JSZip plugin ([[$:/plugins/tiddlywiki/jszip]]) to 
 <div author="JeremyRuston" core-version="&gt;=5.0.0" created="20190928044101052" dependents="" description="Basic theme" modified="20190928044101052" name="Vanilla" original-plugin-type="theme" original-tags="" original-title="$:/themes/tiddlywiki/vanilla" original-type="application/json" plugin-priority="0" server-url="https://tiddlywiki.com/library/v5.1.21/index.html" tags="$:/tags/RemoteAssetInfo" title="$:/temp/RemoteAssetInfo/https://tiddlywiki.com/library/v5.1.21/index.html/$:/themes/tiddlywiki/vanilla" type="text/vnd.tiddlywiki" version="5.1.21">
 <pre></pre>
 </div>
-<div created="20190928044406657" modified="20190928044455559" title="$:/temp/RemoteAssetSearch/$:/config/OfficialPluginLibrary">
-<pre>codemirror</pre>
+<div created="20190928044406657" modified="20200203133930883" title="$:/temp/RemoteAssetSearch/$:/config/OfficialPluginLibrary">
+<pre></pre>
 </div>
-<div created="20190928044502103" modified="20190928044502103" tags="$:/tags/ServerConnection" title="$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.21/index.html" url="https://tiddlywiki.com/library/v5.1.21/index.html">
+<div created="20200203133954384" modified="20200203133954385" tags="$:/tags/ServerConnection" title="$:/temp/ServerConnection/https://tiddlywiki.com/library/v5.1.21/index.html" url="https://tiddlywiki.com/library/v5.1.21/index.html">
 <pre>loaded</pre>
 </div>
 <div created="20190928044206057" modified="20190928045505738" title="$:/theme">
