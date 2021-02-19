@@ -5,15 +5,7 @@ permalink: /about/
 date: 2019-08-12
 ---
 
-## Contact
 
-Email address: [aoi aoibird com](mailto:{{ site.email }})
-
-## Social
-
-{% include social.html %}
-
-## Blog
-
-Powered by Jekyll. Theme is Minima 2.5.0 (modified).
-
+- <i class="far fa-envelope"></i> [aoi aoibird.com](mailto:{{ site.email }})
+- <i class="fab fa-github"></i> <a href="https://github.com/{{ site.github_username }}">{{ site.github_username }}</a>
+- <i class="fas fa-rss"></i> <a href="{{ 'feed.xml' | relative_url }}">RSS</a>
