@@ -1,0 +1,4 @@
+{%- assign target_page = site.pages | where: include.attr, include.value | first -%}
+{%- if target_page -%}
+{{ target_page.excerpt }}
+{%- endif -%}

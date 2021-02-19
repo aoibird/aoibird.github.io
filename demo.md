@@ -28,10 +28,10 @@ table
 
 ## Ruby Charecter
 
-{% include ruby_char.html below="<a href=\"https://en.wikipedia.org/wiki/Ruby_character\">Ruby Charecter</a>" above="旁注标记" %}
+{% include ruby-char.html below="<a href=\"https://en.wikipedia.org/wiki/Ruby_character\">Ruby Charecter</a>" above="旁注标记" %}
 
 ```
-{% include ruby_char.html below="<a href=\"https://en.wikipedia.org/wiki/Ruby_character\">Ruby Charecter</a>" above="旁注标记" %}
+\{\% include ruby-char.html below="<a href=\"https://en.wikipedia.org/wiki/Ruby_character\">Ruby Charecter</a>" above="旁注标记" \%\}
 ```
 
 ## Code Highlighting

@@ -97,6 +97,15 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: $base-font-weight;
 }
 
+h1 {
+    color: $brand-color;
+    font-weight: bold;
+}
+
+h2 {
+    border-bottom: 1px solid $grey-color-light;
+}
+
 
 
 /**
@@ -105,10 +114,6 @@ h1, h2, h3, h4, h5, h6 {
 a {
   color: $brand-color;
   text-decoration: none;
-
-  &:visited {
-    color: darken($brand-color, 15%);
-  }
 
   &:hover {
     color: $text-color;
@@ -144,7 +149,7 @@ code {
   @include relative-font-size(0.9375);
   border: 1px solid $grey-color-light;
   border-radius: 3px;
-  background-color: #eef;
+  background-color: $code-background-color;
 }
 
 code {
@@ -172,15 +177,15 @@ pre {
   max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
   margin-right: auto;
   margin-left: auto;
-  padding-right: $spacing-unit;
-  padding-left: $spacing-unit;
+  // padding-right: $spacing-unit;
+  // padding-left: $spacing-unit;
   @extend %clearfix;
 
   @include media-query($on-laptop) {
     max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}));
     max-width:         calc(#{$content-width} - (#{$spacing-unit}));
-    padding-right: $spacing-unit / 2;
-    padding-left: $spacing-unit / 2;
+    // padding-right: $spacing-unit / 2;
+    // padding-left: $spacing-unit / 2;
   }
 }
 

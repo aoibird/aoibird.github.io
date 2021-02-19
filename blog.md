@@ -19,40 +19,11 @@ permalink: /blog/
      </a>
     </h3>
       {%- if site.show_excerpts -%}
-      {{ post.description }}
+      {{ post.description | default: post.excerpt }}
       {%- endif -%}
     </li>
     {%- endfor -%}
   </ul>
   {%- endif -%}
 
-
-  <h2>Categories</h2>
-  <ul>
-  {% for category in site.categories %}
-  {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d %A" -%}
-    <li>{{ category[0] }}
-    <ul>
-    {% for post in category[1] %}
-    <li><a href="{{ post.url }}">{{ post.title }}</a> {{ post.date | date: date_format }}</li>
-    {% endfor %}
-    </ul>
-    </li>
-  {% endfor %}
-  </ul>
-
-
-  <h2>Tags</h2>
-  <ul>
-  {% for tag in site.tags %}
-  {%- assign date_format = site.minima.date_format | default: "%Y-%m-%d %A" -%}
-    <li>{{ tag[0] }}
-    <ul>
-    {% for post in tag[1] %}
-    <li><a href="{{ post.url }}">{{ post.title }}</a> {{ post.date | date: date_format }}</li>
-    {% endfor %}
-    </ul>
-    </li>
-  {% endfor %}
-  </ul>
 </div>

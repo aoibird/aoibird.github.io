@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: Home
 ---
 
@@ -8,13 +8,14 @@ title: Home
 <ul>
 {%- if site.posts.size > 2 -%}
   {%- for i in (0..1) -%}
-  <li>{{ site.posts[i].date | date: "%Y-%m-%d" }} <a href="{{ site.posts[i].url | relative_url }}">{{ site.posts[i].title | escape }}</a></li>
+  <li>
+    <span class="post-meta">{{ site.posts[i].date | date: "%b %-d, %Y" }}</span>
+    <a href="{{ site.posts[i].url | relative_url }}">{{ site.posts[i].title | escape }}</a>
+  </li>
   {%- endfor -%}
 {%- endif -%}
 </ul>
 
-## [Wiki](/wiki.html)
-
 ## [Bookmarks](/bookmarks/)
 
-## [About](/about/)
+{% include page-excerpt.html attr="name" value="bookmarks.md" %}
