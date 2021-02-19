@@ -6,6 +6,7 @@ categories: Computer/OS
 #  - Algorithms
 tags: [OS, Threads]
 description:
+excerpt_separator: <!--more-->
 ---
 
 创建 POSIX 线程需要使用函数 `pthread_create()`，例如：
@@ -22,6 +23,8 @@ for (int i = 0; i < N; i++) {
 4 个参数依次为存储线程地址、属性、执行的函数名、向线程传递的参数的指针。
 
 上述代码问题在于内存分配了 N 次，但是没有及时释放，内存分配的指针被下一次覆盖而丢失，存在内存泄露问题。
+
+<!--more-->
 
 但是如果及时释放内存，像如下代码所示：
 

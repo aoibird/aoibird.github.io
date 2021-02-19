@@ -3,6 +3,7 @@ layout: post
 title: 写一份报告
 categories: [Toolbox]
 tags: [Toolbox, Org mode, Git, Emacs]
+description: 我认为对于写一份报告而言 Org mode 是最好的选择（谦虚点……之一）。
 ---
 
 ## 写作正文

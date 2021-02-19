@@ -3,6 +3,7 @@ layout: post
 title: POJ 3109 Inner Vertices (坐标离散化、差分、树状数组)
 categories: Computer/Algorithms
 tags: [Algorithms, Competitive programming]
+description: 一个无限平面上有 N 个黑点其余为白点，如果某个白点水平左右、垂直上下都存在黑点，那么该点会变为黑点，求最终平面有多少黑点。
 ---
 
 ## 问题描述
