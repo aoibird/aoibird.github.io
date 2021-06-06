@@ -81,8 +81,8 @@ Scheme
 KaTeX: https://katex.org
 
 
-Inline: $$2^n$$
+Inline: $$2^n$$ and \\(2^n\\)
 
 ```
-$$2^n$$
+Inline: $$2^n$$ and \\(2^n\\)
 ```
