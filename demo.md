@@ -81,7 +81,7 @@ Scheme
 KaTeX: https://katex.org
 
 
-$$2^n$$
+Inline: $$2^n$$
 
 ```
 $$2^n$$
