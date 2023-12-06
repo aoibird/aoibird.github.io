@@ -21,6 +21,13 @@ theme: minima
 plugins:
   - jekyll-feed
 
+giscus:
+  enabled: true
+  repo: aoibird/aoibird.github.io
+  repo_id: MDEwOlJlcG9zaXRvcnkyMDE3NzM2OTA=
+  category: General
+  category_id: DIC_kwDODAbSes4Cbh49
+
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
