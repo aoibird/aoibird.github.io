@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="aoibird">
+    <meta name="description" content="aoibird's blog">
+
+    <link rel="stylesheet" href="/assets/main.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+          integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+          crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+            integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+            crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+            integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+            crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>YubiKey 5 初步体验 | aoibird</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="YubiKey 5 初步体验" />
+<meta name="author" content="aoibird" />
+<meta property="og:locale" content="zh" />
+<meta name="description" content="大致尝试了一下 YubiKey 的各种功能。" />
+<meta property="og:description" content="大致尝试了一下 YubiKey 的各种功能。" />
+<link rel="canonical" href="https://aoibird.github.io/blog/2021/03/16/yubikey-5-intro.html" />
+<meta property="og:url" content="https://aoibird.github.io/blog/2021/03/16/yubikey-5-intro.html" />
+<meta property="og:site_name" content="aoibird" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-03-16T00:00:00+00:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"aoibird"},"description":"大致尝试了一下 YubiKey 的各种功能。","url":"https://aoibird.github.io/blog/2021/03/16/yubikey-5-intro.html","@type":"BlogPosting","headline":"YubiKey 5 初步体验","dateModified":"2021-03-16T00:00:00+00:00","datePublished":"2021-03-16T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://aoibird.github.io/blog/2021/03/16/yubikey-5-intro.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="https://aoibird.github.io/feed.xml" title="aoibird" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">aoibird</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/blog/">Blog</a><a class="page-link" href="/bookmarks/">Bookmarks</a><a class="page-link" href="/demo/">Demo</a><a class="page-link rss-subscribe" href="/feed.xml">Feed</a>
+        </div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">YubiKey 5 初步体验</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-03-16T00:00:00+00:00" itemprop="datePublished">
+        <i class="far fa-calendar-alt"></i>2021-03-16 Tue
+      </time><span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">aoibird</span></span><span class="post-categories"><i class="far fa-folder"></i><a>Computer</a></span><span class="post-tags">
+        <i class="fas fa-tags"></i><a>YubiKey</a><a>OTP</a><a>OATH</a><a>PIV</a><a>PGP</a><a>FIDO</a></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="功能">功能</h2>
+
+<ol>
+  <li>OTP（One-time passwords）：虽然名为 OTP，但不完全是 OTP，此模式下 YubiKey 作为人体学接口设备（Human interface devices），相当于键盘，触摸 YubiKey 后会键入密码。有两个插槽，通过长按和短按区分，可配置为 Yubico OTP、OATH-HTOP、挑战应答（Challenge-response）、静态密码（Static passwords）的其中之一。</li>
+  <li>OATH（Open Authentication）：YubiKey 支持 OATH 组织的 HTOP（HMAC-based one-time password algorithm）和 TOTP（time-based one-time password algorithm）认证标准。</li>
+  <li>FIDO（FIDO alliance）：YubiKey 支持 FIDO 联盟的认证标准，FIDO 或 U2F 代表一代，用作第二因素（2nd factor）认证，FIDO2 或 WebAuthn 代表二代，既可以用作第二因素认证也可以用作无密（passwordless）认证。</li>
+  <li>PIV（Personal Identity Verification）：YubiKey 作为 PIV 智能卡（smartcards），PIV 是<a href="https://csrc.nist.gov/groups/SNS/piv/standards.html">美国联邦政府标准</a>，用于联邦政府职员的身份识别和认证。macOS、Linux、Windows 都支持，可以用于本地设备登录。</li>
+  <li>PGP：YubiKey 作为 OpenPGP 智能卡（smartcards），能够安全地存储私钥，进行加密、解密、签名、认证等工作。</li>
+</ol>
+
+<h2 id="配置工具">配置工具</h2>
+<ul>
+  <li>YubiKey manager：YubiKey 配置工具。（<a href="https://developers.yubico.com/yubikey-manager/">命令行</a>：<code class="language-plaintext highlighter-rouge">ykman</code>，<a href="https://developers.yubico.com/yubikey-manager-qt/">图形界面</a>：<code class="language-plaintext highlighter-rouge">yubikey-manager-qt</code>）</li>
+  <li>YubiKey personalization：比 YubiKey manager 更强大但也更复杂。（<a href="https://developers.yubico.com/yubikey-personalization/">命令行</a>：<code class="language-plaintext highlighter-rouge">ykpersonalize</code>，<a href="https://developers.yubico.com/yubikey-personalization-gui/">图形界面</a>：<code class="language-plaintext highlighter-rouge">yubikey-personalization-gui</code>）</li>
+</ul>
+
+<h2 id="fido-联盟标准">FIDO 联盟标准</h2>
+<p>在使用上这是最简单的，用于网站两步验证只需要向网站提供公钥，在登录时触摸 YubiKey。尽管 FIDO2/WebAuthn 允许无密（passwordless）认证，但是一般网站支持的都是第二因素认证<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>。系统的用户认证可以使用 PAM（pluggable authentication module）和 <a href="https://developers.yubico.com/pam-u2f/">pam-u2f</a> 实现。</p>
+
+<p>以 Arch Linux 为例：</p>
+<ol>
+  <li>安装 <code class="language-plaintext highlighter-rouge">pam-u2f</code>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>pacman <span class="nt">-S</span> pam-u2f
+</code></pre></div>    </div>
+  </li>
+  <li>添加 key
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> ~/.config/Yubico
+pamu2fcfg <span class="nt">-u</span> <span class="sb">`</span><span class="nb">whoami</span><span class="sb">`</span> <span class="nt">-i</span> pam://<span class="sb">`</span><span class="nb">hostname</span><span class="sb">`</span> <span class="nt">-o</span> pam://<span class="sb">`</span><span class="nb">hostname</span><span class="sb">`</span> <span class="o">&gt;&gt;</span> ~/.config/Yubico/u2f_keys
+</code></pre></div>    </div>
+  </li>
+  <li>PAM 配置文件在 <code class="language-plaintext highlighter-rouge">/etc/pam.d</code>，如果要用 YubiKey 作为 sudo 认证，编辑 <code class="language-plaintext highlighter-rouge">/etc/pam.d/sudo</code> 如果是 tty 登录编辑 <code class="language-plaintext highlighter-rouge">/etc/pam.d/login</code>，其他同理，将下面一行添加到文件中，<code class="language-plaintext highlighter-rouge">cue</code> 表示有消息提示：
+    <div class="language-config highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">auth</span> <span class="n">sufficient</span> <span class="n">pam_u2f</span>.<span class="n">so</span> <span class="n">cue</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="oath-组织标准">OATH 组织标准</h2>
+<p>YubiKey 支持两种算法 HOTP 和 TOTP，用于网站的两步验证，一般使用 TOTP。此模式下 YubiKey 相当于 Authenticator，最多可存储 30 个凭证。既可以通过 <code class="language-plaintext highlighter-rouge">ykman oath</code> 设置也可以通过 Yubico Authenticator 图形界面设置。</p>
+
+<p>将令牌添加到 YubiKey，（<code class="language-plaintext highlighter-rouge">-i</code> 添加 issuer）：</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ykman oath accounts add <span class="nt">--touch</span> <span class="nt">-i</span> Google &lt;username&gt; &lt;token&gt;
+</code></pre></div></div>
+
+<p>生成（<code class="language-plaintext highlighter-rouge">-s</code> 只匹配一条记录并且只输出动态码）：</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ykman oath accounts code <span class="nt">-s</span> Google:username
+</code></pre></div></div>
+
+<h2 id="otp">OTP</h2>
+
+<ol>
+  <li>Yubico OTP：Yubico 的 OTP 算法，需要连接到 Yubico 的验证服务器进行验证，更适合登录远程设备，本地可以使用挑战应答模式。</li>
+  <li>OATH-HTOP：存储一个 OATH-HOTP 凭证，与 OATH 下的 30 个凭证相比比较浪费，但是可以通过触摸 YubiKey 键入密码。</li>
+  <li>挑战应答（Challenge-response）：存储一个 Challenge-response 凭证。一般用作本地认证，KeePass、Password Safe 等密码管理器支持，结合 <code class="language-plaintext highlighter-rouge">yubico-pam</code> 可以用作本地设备登录。Challenge-response 有两种一种是 Yubico OTP、一种是 HMAC-SHA1。<code class="language-plaintext highlighter-rouge">yubico-pam</code> 和 KeePass 都使用 HMAC-SHA1。Yubico OTP……不知道有谁支持。</li>
+  <li>静态密码（Static passwords）：存储一个静态密码，可以配置为主设备的登录密码。</li>
+</ol>
+
+<h2 id="piv-compatible-智能卡">PIV-compatible 智能卡</h2>
+<p>Yubico 的<a href="https://developers.yubico.com/PIV/Guides/">文档</a>中列出了各种用法，我并没有全部尝试过。由于 macOS 的登录机制不同<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>，我用它来登录 macOS。参照<a href="https://support.yubico.com/hc/en-us/articles/360016649059">官方文档配置</a>即可。</p>
+
+<h2 id="openpgp-智能卡">OpenPGP 智能卡</h2>
+<p>已经有了<a href="https://github.com/drduh/YubiKey-Guide/blob/master/README.md">很棒的教程</a>介绍如何将 YubiKey 作为 OpenPGP 智能卡。</p>
+
+<p>略有不同的是，我在 Live 环境的 Tails 上生成私钥。不联网——其实是连不上；没有软件安装——该有的都有了；不需要增熵——已经很高了。</p>
+
+<p>成功完成配置教程后，就可以使用 PGP 密钥进行加密、解密、签名、验证等操作了。PGP 的用途广泛，不仅可以用于安全电子邮件，还可以用于<a href="https://www.passwordstore.org/">密码管理器</a>。</p>
+
+<h2 id="参考">参考</h2>
+
+<ul>
+  <li><a href="https://wiki.archlinux.org/index.php/YubiKey">YubiKey - Arch Wiki</a></li>
+  <li><a href="https://wiki.archlinux.org/index.php/Universal_2nd_Factor">Universal 2nd Factor - Arch Wiki</a></li>
+  <li><a href="https://github.com/drduh/YubiKey-Guide/blob/master/README.md">YubiKey Guide</a></li>
+</ul>
+
+<h2 id="脚注">脚注</h2>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>In addition, WebAuthn can make it possible to support login using your device as a “single-factor” security key with biometric authentication instead of a password. Although we’re not ready to announce further plans, we’ll continue to pursue ways to make secure authentication as easy as possible for everyone on GitHub. – <a href="https://github.blog/2019-08-21-github-supports-webauthn-for-security-keys/">GitHub supports Web Authentication (WebAuthn) for security keys</a> <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Apple has changed entitlements in authorization and added extra protections to the login process, which prevents it from communicating with USB devices (including the YubiKey). – <a href="https://support.yubico.com/hc/en-us/articles/360016649259-macOS-Login-Tool-Configuration-Guide">macOS Login Tool Configuration Guide</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div><script src="https://giscus.app/client.js"
+        data-repo="aoibird/aoibird.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDE3NzM2OTA="
+        data-category="General"
+        data-category-id="DIC_kwDODAbSes4Cbh49"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+<noscript>Please enable JavaScript to view the comments.</noscript>
+<a class="u-url" href="/blog/2021/03/16/yubikey-5-intro.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+  </body>
+
+</html>
