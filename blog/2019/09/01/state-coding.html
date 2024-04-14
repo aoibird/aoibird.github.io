@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="aoibird">
+    <meta name="description" content="aoibird's blog">
+
+    <link rel="stylesheet" href="/assets/main.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+          integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X"
+          crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"
+            integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4"
+            crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+            integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+            crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>如何编码状态？ | aoibird</title>
+<meta name="generator" content="Jekyll v4.2.0" />
+<meta property="og:title" content="如何编码状态？" />
+<meta name="author" content="aoibird" />
+<meta property="og:locale" content="zh" />
+<meta name="description" content="对排列组合的编码、解码及相关问题。" />
+<meta property="og:description" content="对排列组合的编码、解码及相关问题。" />
+<link rel="canonical" href="https://aoibird.github.io/blog/2019/09/01/state-coding.html" />
+<meta property="og:url" content="https://aoibird.github.io/blog/2019/09/01/state-coding.html" />
+<meta property="og:site_name" content="aoibird" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-09-01T00:00:00+00:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"aoibird"},"description":"对排列组合的编码、解码及相关问题。","url":"https://aoibird.github.io/blog/2019/09/01/state-coding.html","@type":"BlogPosting","headline":"如何编码状态？","dateModified":"2019-09-01T00:00:00+00:00","datePublished":"2019-09-01T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://aoibird.github.io/blog/2019/09/01/state-coding.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="https://aoibird.github.io/feed.xml" title="aoibird" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">aoibird</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/blog/">Blog</a><a class="page-link" href="/bookmarks/">Bookmarks</a><a class="page-link" href="/demo/">Demo</a><a class="page-link rss-subscribe" href="/feed.xml">Feed</a>
+        </div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">如何编码状态？</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-09-01T00:00:00+00:00" itemprop="datePublished">
+        <i class="far fa-calendar-alt"></i>2019-09-01 Sun
+      </time><span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">aoibird</span></span><span class="post-categories"><i class="far fa-folder"></i><a>Computer/Algorithms</a></span><span class="post-tags">
+        <i class="fas fa-tags"></i><a>Algorithms</a><a>C++</a></span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="状态">状态</h2>
+<p>状态是求解过程中的一步。确定状态是什么，如何表示，如何标记，是状态空间搜索中的一环。</p>
+
+<p>首先确定状态是什么，这就需要具体问题具体分析。如何表示状态？状态一般是排列或组合比，如，迷宫最短路中当前所在点 <code class="language-plaintext highlighter-rouge">(r, c)</code> 是组合，八数码问题的盘面是排列。状态存储使用数组，以集合 <code class="language-plaintext highlighter-rouge">{1, 2, 3, 4}</code> 例，排列 <code class="language-plaintext highlighter-rouge">{1, 2, 4, 3}</code> 数组就是 <code class="language-plaintext highlighter-rouge">[1, 2, 4, 3]</code>，组合 <code class="language-plaintext highlighter-rouge">{1, 3, 4}</code> 数组就是 <code class="language-plaintext highlighter-rouge">[1, 0, 1, 1]</code>。</p>
+
+<p>其次如何标记，如果 N 元组 N 个坐标组成的空间较小，直接在空间里标记即可，比如二维迷宫最短路，坐标 <code class="language-plaintext highlighter-rouge">(r, c)</code> 直接使用 <code class="language-plaintext highlighter-rouge">d[r][c]</code> 标记。但是如果个数较多，或是值较大，状态又没有充满整个空间，就会浪费很多存储空间，因此给状态编号，所需的存储空间就是状态总数，开一个不少于状态总数的一维数组即可。</p>
+
+<p>给状态编号就是编码，还原就是解码。</p>
+
+<h2 id="排列不放回有序抽样">排列（不放回有序抽样）</h2>
+<p>排列即从备选集合中顺序有关地挑选元素，不可再次挑选，N 元素排列总数为 N!。</p>
+
+<p>如何编码？首先找找规律吧。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>排列</th>
+      <th>编码</th>
+      <th>数码 (6, 2, 1, 1)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1234</td>
+      <td>0</td>
+      <td>0 0 0 0</td>
+    </tr>
+    <tr>
+      <td>1243</td>
+      <td>1</td>
+      <td>0 0 1 0</td>
+    </tr>
+    <tr>
+      <td>1324</td>
+      <td>2</td>
+      <td>0 1 0 0</td>
+    </tr>
+    <tr>
+      <td>1342</td>
+      <td>3</td>
+      <td>0 1 1 0</td>
+    </tr>
+    <tr>
+      <td>1423</td>
+      <td>4</td>
+      <td>0 2 0 0</td>
+    </tr>
+    <tr>
+      <td>1432</td>
+      <td>5</td>
+      <td>0 2 1 0</td>
+    </tr>
+    <tr>
+      <td>2134</td>
+      <td>6</td>
+      <td>1 0 0 0</td>
+    </tr>
+    <tr>
+      <td>2143</td>
+      <td>7</td>
+      <td>1 0 1 0</td>
+    </tr>
+    <tr>
+      <td>2314</td>
+      <td>8</td>
+      <td>1 1 0 0</td>
+    </tr>
+    <tr>
+      <td>2341</td>
+      <td>9</td>
+      <td>1 1 1 0</td>
+    </tr>
+    <tr>
+      <td>2413</td>
+      <td>10</td>
+      <td>1 2 0 0</td>
+    </tr>
+    <tr>
+      <td>2431</td>
+      <td>11</td>
+      <td>1 2 1 0</td>
+    </tr>
+    <tr>
+      <td>3124</td>
+      <td>12</td>
+      <td>2 0 0 0</td>
+    </tr>
+    <tr>
+      <td>3142</td>
+      <td>13</td>
+      <td>2 0 1 0</td>
+    </tr>
+    <tr>
+      <td>3214</td>
+      <td>14</td>
+      <td>2 1 0 0</td>
+    </tr>
+    <tr>
+      <td>3241</td>
+      <td>15</td>
+      <td>2 1 1 0</td>
+    </tr>
+    <tr>
+      <td>3412</td>
+      <td>16</td>
+      <td>2 2 0 0</td>
+    </tr>
+    <tr>
+      <td>3421</td>
+      <td>17</td>
+      <td>2 2 1 0</td>
+    </tr>
+    <tr>
+      <td>4123</td>
+      <td>18</td>
+      <td>3 0 0 0</td>
+    </tr>
+    <tr>
+      <td>4132</td>
+      <td>19</td>
+      <td>3 0 1 0</td>
+    </tr>
+    <tr>
+      <td>4213</td>
+      <td>20</td>
+      <td>3 1 0 0</td>
+    </tr>
+    <tr>
+      <td>4231</td>
+      <td>21</td>
+      <td>3 1 1 0</td>
+    </tr>
+    <tr>
+      <td>4312</td>
+      <td>22</td>
+      <td>3 2 0 0</td>
+    </tr>
+    <tr>
+      <td>4321</td>
+      <td>23</td>
+      <td>3 2 1 0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>合理猜测，数码代表逆序数，第 n 位权重是 n! 即 n 阶乘，因此编码是逆序数乘权重，解码是将编码解析得到逆序数，再用逆序数取数。</p>
+
+<h3 id="编码">编码</h3>
+<p>数组 <code class="language-plaintext highlighter-rouge">fact</code> 存储阶乘，事先计算好，因为阶乘增长很快，数组不会很大。接下来对每一位求逆序数，逆序数乘权重，加和到编码中。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">encode_permutation</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">code</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+    <span class="n">code</span> <span class="o">+=</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">*</span> <span class="n">fact</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">code</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="解码">解码</h3>
+<p>解码需要安置一个元素后将它从备选集合中去除，所以比较麻烦。首先，除权重得到每一位的逆序数，逆序数就是在备选集合中的顺位，循环计数到该元素后退出，取元素标记已挑选。数组 <code class="language-plaintext highlighter-rouge">v</code> 记录备选集合元素是否已被挑选，<code class="language-plaintext highlighter-rouge">c</code> 用于计数。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">decode_permutation</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="p">,</span> <span class="kt">int</span> <span class="n">code</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">v</span><span class="p">[</span><span class="n">MAXN</span><span class="p">];</span>
+  <span class="n">memset</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">v</span><span class="p">));</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="n">code</span> <span class="o">/</span> <span class="n">fact</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+
+    <span class="c1">// select</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+        <span class="k">else</span> <span class="n">c</span><span class="o">++</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+
+    <span class="n">code</span> <span class="o">=</span> <span class="n">code</span> <span class="o">%</span> <span class="n">fact</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="组合不放回无序抽样">组合（不放回无序抽样）</h2>
+<p>组合即从备选集合顺序无关地挑选元素，不可再次挑选，N 元素的组合总数为 2^N。</p>
+
+<p>组合就是子集，可用位矢量法和二进制法表示。位矢量法就是将元素选中标志存储于一个数组中，一般 1 选中 0 不选中。以集合 <code class="language-plaintext highlighter-rouge">s = {1, 2, 3, 4}</code> 为例，子集 <code class="language-plaintext highlighter-rouge">sub = {1, 3, 4}</code> 可表示为 <code class="language-plaintext highlighter-rouge">[1, 0, 1, 1]</code>。那么既然元素只有选中、不选中两种，那么二进制足够表示，前例用二进制法表示就是 <code class="language-plaintext highlighter-rouge">1011 == 13</code>（低位在前，不过反着来也没问题）。不难看出，位矢量表示就是状态本身，二进制表示就是状态编号。</p>
+
+<h3 id="编码-1">编码</h3>
+<p>二进制表示是编码，位矢量表示转化为编码需按照一定顺序（从低到高或从高到低都行）依次放入 <code class="language-plaintext highlighter-rouge">code</code> 二进制位中。<code class="language-plaintext highlighter-rouge">C[i]</code> 代表第 i 位的二进制位即选中标志，用 <code class="language-plaintext highlighter-rouge">C[i] &lt;&lt; i</code> 移至第 i 位，或运算合并到 <code class="language-plaintext highlighter-rouge">code</code> 中。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">encode_combination</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">code</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="n">code</span> <span class="o">|</span> <span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="n">code</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="解码-1">解码</h3>
+<p>同理，位矢量表示是状态，二进制表示转化为状态就是将二进制位依次取出存入数组。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">decode_combination</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">code</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">code</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">code</span> <span class="o">=</span> <span class="n">code</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="允许重复排列放回有序抽样">允许重复排列（放回有序抽样）</h2>
+<p>允许重复排列即从备选集合顺序有关地挑选元素但是可再次挑选，由于可以重复，选择元素个数可以不定，总数与选择元素个数有关，N 选 K 允许重复排列总数为 N^K。不难看出，N 选 K 则是 K 位 N 进制，编码、解码就是进制转化。</p>
+
+<h2 id="允许重复组合放回无序抽样">允许重复组合（放回无序抽样）</h2>
+<p>允许重复组合即从备选集合顺序无关地挑选元素但是可再次挑选，同理总数与选择元素个数有关，N 选 K 允许重复组合总数为 K^N。状态用位矢量法表示，只不过原先的选中标志变为选中数目。而二进制显然不够，因此使用 K 进制。</p>
+
+<h2 id="问题">问题</h2>
+
+<h3 id="八数码问题">八数码问题</h3>
+<p>盘面是状态，它是 9 位数的排列，通过编码、解码标记状态就不用开 9 维数组了。</p>
+
+<h3 id="travelling-by-stagecoach-poj-2686">Travelling by Stagecoach (POJ 2686)</h3>
+<p>状态压缩，车票是一个集合（组合），将集合编码为整数，也就是集合的二进制表示，如此一来集合就可以作为数组下标使用。</p>
+
+<h2 id="参考">参考</h2>
+<ul>
+  <li>《离散数学及其应用》罗森 著：四种计数问题</li>
+  <li>《算法竞赛入门经典（第 2 版）》刘汝佳 著：编码解码排列，问题来源</li>
+  <li>《概率（第一卷）》施利亚耶夫 著：四种抽样，能和计数问题对应</li>
+  <li>《挑战程序设计竞赛（第 2 版）》秋叶拓哉 岩田阳一 北川宜稔 著：问题来源</li>
+</ul>
+
+  </div><script src="https://giscus.app/client.js"
+        data-repo="aoibird/aoibird.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyMDE3NzM2OTA="
+        data-category="General"
+        data-category-id="DIC_kwDODAbSes4Cbh49"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+<noscript>Please enable JavaScript to view the comments.</noscript>
+<a class="u-url" href="/blog/2019/09/01/state-coding.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+  </body>
+
+</html>
